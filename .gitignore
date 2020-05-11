@@ -30,3 +30,15 @@ packages/
 .sonarqube/
 .vs/
 *.orig
+*.dll
+
+#Ignore thumbnails created by Windows
+#Ignore files built by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.tlb
+*.tlh
+*.lib
+[Tt]est[Rr]esult*
+#Nuget packages folder

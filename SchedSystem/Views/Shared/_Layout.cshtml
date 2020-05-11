@@ -6,27 +6,43 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href='https://fonts.googleapis.com/css?family=Cantata One' rel='stylesheet'>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #217ff3;">
+        <div class="container" style="padding: 10px;">
+            <div class="navbar-header" style="height: 80px;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div class="container" style="margin-left: -110px;">
+                    <img src="~/Content/Images/DFA.png" alt="Home" height="75" width="75" />
+                    <span style="color:#ffffffc9;font-size: 12px;font-family: 'Cantata One';position: relative;top: -20px;left: 15px;">REPUBLIC OF THE PHILIPPINES</span>
+                    <div style="background-color:#ffffffc9;height:2px;width: 478px;position: relative;top: -50px;left: 94px;"></div>
+                    <span style="color:#ffffffc9;font-size: 24px;font-family: 'Cantata One';position: relative;top: -50px;left: 93px;">DEPARTMENT OF FOREIGN AFFAIRS</span>
+                    <span style="        color: #ffffffc9;
+        font-size: 12px;
+        font-family: 'Cantata One';
+        position: relative;
+        top: -32px;
+        left: -392px;">2330 ROXAS BOULEVARD, PASAY CITY, PHILIPPINES 1300</span>
+                </div>
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
+            @*<div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>
+                        <div>
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </div>
+                    </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="container body-content">
