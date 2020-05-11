@@ -9,15 +9,15 @@
 
     </div>
     <div class="col-md-6 col-sm-6">
-        <section id="loginForm" style="border: 1px solid #b7b7b7;height: 315px;">
+        <section id="loginForm" class="form-control-font" style="border: 1px solid #b7b7b7;height:315px;">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <div style="background-color: #217ff3;color: white;height: 35px;">
-                    <p class="text-left" style="font-family:  Arial, Helvetica, sans-serif;padding: 8px;font-weight:600;font-size:16px;">Login</p>
+                    <p class="text-left " style="padding: 8px;font-weight:600;font-size:16px;">Login</p>
                 </div>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div style="padding: 5px;font-family: Arial, Helvetica, sans-serif;">
+                <div style="padding: 5px;">
                     <div class="form-group ">
                         <div class="col-md-6 col-sm-6" style="position: relative;left: 25%;top: 50px;">
                             @Html.TextBoxFor(m => m.Email, new { placeholder = "Email Address", @class = "form-control", Style = "font-size: 16px;text-align:center;" })
@@ -54,7 +54,7 @@
                         <div class="col-md-6 col-sm-6" style="position: relative;left: 25%;top: 38px;text-align:center;">
                             <p>
                                 <span style="color:#656565">New user? Click</span>
-                                <span style="color:#217ff3;font-weight: bold;">@Html.ActionLink("here", "Register")</span>
+                                <span style="color:#217ff3;font-weight: bold;">@Html.ActionLink("here", "Register","Account")</span>
                                 <span style="color:#656565">to register</span>
                             </p>
                         </div>

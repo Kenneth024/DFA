@@ -79,12 +79,15 @@ namespace SchedSystem.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Suffix")]
+        [Display(Name = "Suffix (ex: Jr)")]
         public string Suffix { get; set; }
 
         [Required]
         [Display(Name = "Address")]
         public string Address { get; set; }
+        [Required]
+        [Display(Name = "Citizenship")]
+        public string Citizenship { get; set; }
 
         [Required]
         [Display(Name = "Date of Birth")]
@@ -95,12 +98,12 @@ namespace SchedSystem.Models
         public string Sex { get; set; }
 
         [Required]
-        [Display(Name = "Contact Number")]
+        [Display(Name = "Contact No.")]
         public string ContactNumber { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Address")]
         public string Email { get; set; }
 
         [Required]
