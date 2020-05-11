@@ -17,12 +17,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="container" style="margin-left: -110px;">
+                <div class="container">
                     <img src="~/Content/Images/DFA.png" alt="Home" height="75" width="75" />
-                    <span style="color:#ffffffc9;font-size: 12px;font-family: 'Chonburi';position: relative;top: -20px;left: 15px;">REPUBLIC OF THE PHILIPPINES</span>
+                    <span style="color:#ffffffc9;font-size: 12px;position: relative;top: -20px;left: 15px;">REPUBLIC OF THE PHILIPPINES</span>
                     <div style="background-color:#ffffffc9;height:2px;width: 424px;position: relative;top: -50px;left: 94px;"></div>
-                    <span style="color:#fffffffc;font-weight:bold;font-size: 24px;font-family: 'Chonburi';position: relative;top: -50px;left: 93px;">DEPARTMENT OF FOREIGN AFFAIRS</span>
-                    <span style="color: #ffffffc9;font-size: 12px;font-family: 'Chonburi';position: relative;top: -32px;left: -337px;">2330 ROXAS BOULEVARD, PASAY CITY, PHILIPPINES 1300</span>
+                    <span style="color:#fffffffc;font-weight:bold;font-size: 24px;position: relative;top: -50px;left: 93px;">DEPARTMENT OF FOREIGN AFFAIRS</span>
+                    <span style="color: #ffffffc9;font-size: 12px;position: relative;top: -32px;left: -337px;">2330 ROXAS BOULEVARD, PASAY CITY, PHILIPPINES 1300</span>
                 </div>
                 @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
@@ -35,17 +35,17 @@
                     </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>*@
+                </ul>*@
+                @*@Html.Partial("_LoginPartial")*@
+            @*</div>*@
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="font-family: 'Cantata One';">
         @RenderBody()
-        <hr />
+        @*<hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
