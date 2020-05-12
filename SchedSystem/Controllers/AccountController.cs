@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SchedSystem.Models;
+using SchedSystem.Utilities;
 
 namespace SchedSystem.Controllers
 {
@@ -17,15 +18,17 @@ namespace SchedSystem.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private Email _email;
         public AccountController()
         {
+            _email = new Email();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, Email email)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _email = email;
         }
 
         public ApplicationSignInManager SignInManager
@@ -34,9 +37,9 @@ namespace SchedSystem.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -79,7 +82,26 @@ namespace SchedSystem.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        var user = await UserManager.FindByEmailAsync(model.Email);
+                        if (user != null)
+                        {
+                            if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                            {
+                                LogOff();
+                                return View("Error"); // verify first the email
+                            }
+                        }
+                        else
+                        {
+                            LogOff();
+                            return RedirectToAction("Login");
+                        }
+                        return RedirectToLocal(returnUrl);
+
+                    }
+
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -120,7 +142,7 @@ namespace SchedSystem.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,15 +177,20 @@ namespace SchedSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
+
+                    _email.SendMail(user.Email, callbackUrl);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+                    return RedirectToAction("EmailVerification");
                 }
                 AddErrors(result);
             }
@@ -172,6 +199,12 @@ namespace SchedSystem.Controllers
             return View(model);
         }
 
+        public async Task<ActionResult> VerifyEmail(string userId, string code)
+        {
+            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            return View();
+        }
+        public ActionResult EmailVerification() => View();
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

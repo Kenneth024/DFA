@@ -112,3 +112,9 @@ C:\Scheduling\SchedSystem\SchedSystem\obj\Debug\SchedSystem.csproj.CoreCompileIn
 C:\Scheduling\SchedSystem\SchedSystem\obj\Debug\SchedSystem.csproj.CopyComplete
 C:\Scheduling\SchedSystem\SchedSystem\obj\Debug\SchedSystem.dll
 C:\Scheduling\SchedSystem\SchedSystem\obj\Debug\SchedSystem.pdb
+C:\Scheduling\SchedSystem\SchedSystem\bin\BouncyCastle.Crypto.dll
+C:\Scheduling\SchedSystem\SchedSystem\bin\MailKit.dll
+C:\Scheduling\SchedSystem\SchedSystem\bin\MimeKit.dll
+C:\Scheduling\SchedSystem\SchedSystem\bin\BouncyCastle.Crypto.xml
+C:\Scheduling\SchedSystem\SchedSystem\bin\MailKit.xml
+C:\Scheduling\SchedSystem\SchedSystem\bin\MimeKit.xml
